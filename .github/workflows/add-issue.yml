@@ -1,0 +1,19 @@
+name: Add Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add-issue:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with: 
+          project: capstone-project
+          column: New Issues
+          repo-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    - name: Add Issue
+      run: |
+        echo "Adding issue to repository..."
+        cat ISSUE_TEMPLATE.md >> $GITHUB_EVENT_PATH
